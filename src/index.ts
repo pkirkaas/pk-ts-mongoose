@@ -10,7 +10,10 @@ let lcs=process.env.LOCAL_CONNECTION_STRING;
 
 await mongoose.connect(lcs);
 
+export { mongoose, };
+
 //const tstSchema = new mongoose.Schema({
+  /*
 const tstSchema = new PkSchema({
   name: String,
   age: Number,
@@ -24,3 +27,4 @@ let tst2 = new Tst({name:"Susie", age:55});
 await tst2.save();
 
 console.log('Pk-Ts-Mongoose ???', lcs);
+*/
