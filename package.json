@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.2.0",
-    "pk-ts-node-lib": "git+https://github.com/pkirkaas/pk-ts-node-lib.git#working",
+    "mongoose": "^8.2.1",
+    "pk-ts-node-lib": "git+https://github.com/pkirkaas/pk-ts-node-lib.git#working"
   }
 }
