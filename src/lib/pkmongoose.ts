@@ -53,6 +53,57 @@ export class PkSchema extends mongoose.Schema {
       //@ts-ignore
       return this.db._connectionString;
     };
+
+
+    this.methods.getModelClass = function () {
+      return this.constructor;
+    };
+
+
+   //############################  START  Model Static Methods
+    //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+    this.statics.getModel = function () {
+      return this.modelName;
+    };
+
+
+    this.statics.getKeys = function () {
+      //@ts-ignore
+      return Object.keys(this.schema.tree);
+    };
+    this.statics.isa = function (doc) {
+      /*
+      if (typeof doc === 'string') {
+      }
+      */
+      if (doc instanceof this) {
+        return doc;
+      }
+      return false;
+    };
+
+    this.statics.getId = function (doc, doThrow = true) {
+      if (typeof doc === "string") {
+        return doc;
+      }
+      if (doc instanceof this) {
+        return doc.id;
+      }
+      /*
+      if (doThrow) {
+        throwLog(errMsg);
+      }
+      */
+    };
+
+
+
+
+
+
+
+
   } // END overrided constructor
 
 }
