@@ -4,6 +4,7 @@
  * NOTE: Derived from previous implementations - need to be updated
  */
 import mongoose from 'mongoose';
+import { isPromise, } from "pk-ts-node-lib";
 // What replaces errLog, throwLog,consoleError, ?
 /**
  * Extends Mongoose.schema with additional convenient defaults opts, fields & methods
@@ -37,6 +38,22 @@ export class PkSchema extends mongoose.Schema {
         };
         this.methods.getModelClass = function () {
             return this.constructor;
+        };
+        /**
+         * Returns model data with async virtuals evaluated
+         */
+        this.methods.asyncToObject = async function () {
+            let json = this.toObject();
+            let virtuals = this.schema.virtuals;
+            for (let virtual in virtuals) {
+                if (isPromise(this[virtual])) {
+                    json[virtual] = await this[virtual];
+                }
+                else {
+                    json[virtual] = this[virtual];
+                }
+            }
+            return json;
         };
         //############################  START  Model Static Methods
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv

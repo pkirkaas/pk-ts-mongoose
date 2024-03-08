@@ -60,6 +60,25 @@ export class PkSchema extends mongoose.Schema {
     };
 
 
+
+    /**
+     * Returns model data with async virtuals evaluated
+     */
+    
+    this.methods.asyncToObject = async function () {
+      let json = this.toObject();
+      let virtuals = this.schema.virtuals;
+      for (let virtual in virtuals) {
+        if (isPromise(this[virtual])) {
+          json[virtual] = await this[virtual];
+        } else {
+          json[virtual] = this[virtual];
+        }
+      }
+      return json;
+    };
+
+    
    //############################  START  Model Static Methods
     //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 

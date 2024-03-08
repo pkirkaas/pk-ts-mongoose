@@ -21,6 +21,11 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
+    "monitor" : "nodemon --exec \"npm run build\" --ext js,jsx,ts,tsx,sass,css --delay 5 --watch ./src",
+    "monitorx": "nodemon --exec \"npm run build\"  --delay 5 --watch ./src",
+    "mon1": "nodemon --exec \"npm run build\"  --delay 5 --watch ./src/*",
+    "mon2": "nodemon --exec \"npm run build\"  --ext ts --delay 5 --watch ./src",
+    "mon3": "nodemon --exec \"npm run build\"  --ext ts --delay 5 --watch ./src/*",
     "clean": "rm -rf ./dist ./node_modules package-lock.json && npm i"
   },
   "dependencies": {
